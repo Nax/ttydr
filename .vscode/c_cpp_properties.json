@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "TTYD",
+            "includePath": [
+                "${workspaceFolder}/include"
+            ],
+            "defines": [
+                "DEBUG=1"
+            ],
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x86",
+            "compilerPath": ""
+        },
+    ],
+    "version": 4
+}
