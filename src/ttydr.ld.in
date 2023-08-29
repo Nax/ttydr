@@ -11,9 +11,12 @@ SECTIONS
     SORT(*)(.bss*);
   }
 
-  . = 0x90000000;
+  . = 0x82000000;
   .patch : {
     SORT(*)(.patch);
   }
   /DISCARD/ : { *(.*); }
+
+  DVDResume = 0x802a68d0;
+  ReadDisc = 0x8029c0d0;
 }

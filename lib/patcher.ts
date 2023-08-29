@@ -41,7 +41,7 @@ export class Patcher {
   private patchVirtual(virtAddr: number, data: Buffer) {
     for (const s of this.sections) {
       if (s.vstart <= virtAddr && virtAddr < s.vstart + s.size) {
-        const romAddr = s.poffset + (virtAddr - s.vstart);
+        const romAddr = DOL_OFFSET + s.poffset + (virtAddr - s.vstart);
         this.patch(romAddr, data);
         return;
       }

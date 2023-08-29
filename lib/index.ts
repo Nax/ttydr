@@ -38,13 +38,20 @@ async function generate() {
   await patcher.run();
 
   /* Expand BSS to add our payload */
-  const dolBssSize = Buffer.alloc(4);
+  /*const dolBssSize = Buffer.alloc(4);
   dolBssSize.writeUInt32BE(0x7506C, 0);
-  patchfile.addPatch(0x20300 + 0xdc, dolBssSize);
+  patchfile.addPatch(0x20300 + 0xdc, dolBssSize);*/
+
+  /* Add our payload as text2 */
+  /*const dolHeader = iso.subarray(0x20300, 0x20300 + 0x100);
+  dolHeader.writeUInt32BE(0x1000, 0x08);
+  dolHeader.writeUInt32BE(0x80436500, 0x50);
+  dolHeader.writeUInt32BE(0x10000, 0x98);*/
 
   /* Write the patchfile */
   for (const p of patchfile.patches) {
     p.data.copy(iso, p.addr);
+    console.log(p);
   }
 
   /* Write the ISO */
