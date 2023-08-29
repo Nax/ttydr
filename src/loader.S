@@ -37,6 +37,12 @@ PATCH_START 0x80003154
   mtlr  %r6
   blrl
 
+  /* Call the init func */
+  lis   %r6,ttydrInit@ha
+  addi  %r6,%r6,ttydrInit@l
+  mtlr  %r6
+  blrl
+
   /* Return */
   addi  %r1,%r1,0x10
   lwz   %r0,-4(%r1)

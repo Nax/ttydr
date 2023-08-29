@@ -37,22 +37,14 @@ async function generate() {
   const patcher = new Patcher(iso, rawPatchData, patchfile);
   await patcher.run();
 
-  /* Expand BSS to add our payload */
-  /*const dolBssSize = Buffer.alloc(4);
-  dolBssSize.writeUInt32BE(0x7506C, 0);
-  patchfile.addPatch(0x20300 + 0xdc, dolBssSize);*/
-
-  /* Add our payload as text2 */
-  /*const dolHeader = iso.subarray(0x20300, 0x20300 + 0x100);
-  dolHeader.writeUInt32BE(0x1000, 0x08);
-  dolHeader.writeUInt32BE(0x80436500, 0x50);
-  dolHeader.writeUInt32BE(0x10000, 0x98);*/
-
   /* Write the patchfile */
   for (const p of patchfile.patches) {
     p.data.copy(iso, p.addr);
-    console.log(p);
   }
+
+  /* Inject the actual payload */
+  const payload = await fs.readFile(path.join(DIR_BUILD, 'Debug', 'ttydr_payload.bin'));
+  payload.copy(iso, 0x10000000);
 
   /* Write the ISO */
   await fs.mkdir(DIR_OUT, { recursive: true });

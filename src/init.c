@@ -1,0 +1,4 @@
+void ttydrInit(void)
+{
+
+}
