@@ -5,7 +5,7 @@ ARCH := powerpc-eabi
 
 CFLAGS 		:= -ffreestanding -nostdlib -fno-PIC \
 			   -Os -Wall -Werror=implicit-function-declaration -Werror=implicit-int -Wimplicit-fallthrough \
-			   -Iinclude \
+			   -Iinclude -Ibuild/include \
 			   -MMD -MP
 CC 			:= $(ARCH)-gcc
 OBJCOPY 	:= $(ARCH)-objcopy

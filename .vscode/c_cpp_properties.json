@@ -3,7 +3,8 @@
         {
             "name": "TTYD",
             "includePath": [
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/build/include"
             ],
             "defines": [
                 "DEBUG=1"
