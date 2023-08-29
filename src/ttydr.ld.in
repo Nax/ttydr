@@ -1,0 +1,19 @@
+#include <ttydr/defs.h>
+
+SECTIONS
+{
+
+  . = PAYLOAD_RAM;
+  .text : {
+    SORT(*)(.text*);
+    SORT(*)(.data*);
+    SORT(*)(.rodata*);
+    SORT(*)(.bss*);
+  }
+
+  . = 0x90000000;
+  .patch : {
+    SORT(*)(.patch);
+  }
+  /DISCARD/ : { *(.*); }
+}
