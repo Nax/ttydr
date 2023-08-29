@@ -19,4 +19,5 @@ SECTIONS
 
   DVDResume = 0x802a68d0;
   ReadDisc = 0x8029c0d0;
+  itemEntry = 0x800aebc0;
 }

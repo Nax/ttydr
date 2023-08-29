@@ -38,12 +38,10 @@ export class Patcher {
     this.patchfile.addPatch(romAddr, data);
   }
 
-  private patchVirtual(virtAddr: number, data: Buffer) {
+  private virtualToPhysical(virtAddr: number): number {
     for (const s of this.sections) {
       if (s.vstart <= virtAddr && virtAddr < s.vstart + s.size) {
-        const romAddr = DOL_OFFSET + s.poffset + (virtAddr - s.vstart);
-        this.patch(romAddr, data);
-        return;
+        return DOL_OFFSET + s.poffset + (virtAddr - s.vstart);
       }
     }
 
@@ -56,7 +54,24 @@ export class Patcher {
     this.cursor += 0x08;
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    this.patchVirtual(addr, data);
+    const paddr = this.virtualToPhysical(addr);
+    this.patch(paddr, data);
+  }
+
+  patchCall(patch: Buffer) {
+    const addr = patch.readUInt32BE(this.cursor + 0x00);
+    const func = patch.readUInt32BE(this.cursor + 0x04);
+    this.cursor += 0x08;
+
+    const paddr = this.virtualToPhysical(addr);
+    const rawInstr = this.iso.readUInt32BE(paddr);
+    const offset = (func - addr) >>> 0;
+    const op = (rawInstr >>> 26) & 0x3f;
+    const flags = (rawInstr & 0x3);
+    const instr = ((op << 26) | (offset & 0x3ffffff) | flags) >>> 0;
+    const instrBuffer = Buffer.alloc(4);
+    instrBuffer.writeUInt32BE(instr, 0);
+    this.patch(paddr, instrBuffer);
   }
 
   run() {
@@ -75,6 +90,9 @@ export class Patcher {
       switch (type) {
       case 0x01:
         this.patchASM(this.patches);
+        break;
+      case 0x02:
+        this.patchCall(this.patches);
         break;
       default:
         throw new Error("Invalid patch type: " + type);
