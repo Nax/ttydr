@@ -4,6 +4,8 @@
 
 static void newSave(void)
 {
+    /* Progress 20 = right after tutorial */
+    swByteSet(0, 20);
     seqSetSeq(SEQID_GAME_LOAD, "gor_01", NULL);
 }
 

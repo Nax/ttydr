@@ -21,4 +21,5 @@ SECTIONS
   ReadDisc = 0x8029c0d0;
   itemEntry = 0x800aebc0;
   seqSetSeq = 0x8002e300;
+  swByteSet = 0x80086ba4;
 }
