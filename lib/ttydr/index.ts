@@ -7,6 +7,10 @@ import { Patchfile } from './patchfile';
 import { Patcher } from './patcher';
 import { codegen } from './codegen';
 import { Monitor } from './monitor';
+import { createWorld } from './world';
+import { logic } from './logic';
+import { AddressMap } from './address-map';
+import { randomize } from './randomizer';
 
 async function make() {
   return new Promise((resolve, reject) => {
@@ -38,10 +42,20 @@ export async function generate() {
   /* Read the ISO */
   const iso = await fs.readFile(path.join(DIR_ISO, 'ttyd.iso'));
 
+  /* Extract the address map */
+  const addrMap = new AddressMap(iso);
+
   /* Create the patchfile */
   const rawPatchData = await fs.readFile(path.join(DIR_BUILD, 'Debug', 'ttydr_patch.bin'));
-  const patcher = new Patcher(iso, rawPatchData, patchfile);
+  const patcher = new Patcher(iso, addrMap, rawPatchData, patchfile);
   await patcher.run();
+
+  /* Create the world & apply logic */
+  const world = createWorld();
+  const placement = logic(world);
+
+  /* Patch the items in */
+  randomize(addrMap, patchfile, world, placement);
 
   /* Write the patchfile */
   for (const p of patchfile.patches) {

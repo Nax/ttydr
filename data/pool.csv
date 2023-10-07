@@ -1,0 +1,10 @@
+location,                                             type,         rel,        addr,         item
+Rogueport Sewers Town Badge Soft Stomp,               item_entry,   tik,        8060EB54,     BADGE_SOFT_STOMP
+Rogueport Sewers Town Star Piece 1,                   item_entry,   tik,        8060EDFC,     STAR_PIECE
+Rogueport Sewers Town Star Piece 2,                   item_entry,   tik,        8060EE24,     STAR_PIECE
+Rogueport Sewers Town Star Piece 3,                   item_entry,   tik,        8060EE4C,     STAR_PIECE
+Rogueport Sewers East Entrance Badge Defend Plus P,   item_entry,   tik,        806102F4,     BADGE_DEFEND_PLUS_P
+Rogueport Sewers Woods Badge Damage Dodge,            item_entry,   tik,        8061367C,     BADGE_DAMAGE_DODGE
+Rogueport Sewers Black Key Room Badge Happy Heart P,  item_entry,   tik,        806140E4,     BADGE_HAPPY_HEART_P
+Rogueport Sewers Black Key,                           item_entry,   tik,        8061435C,     KEY_BLACK_1
+Rogueport Sewers Black Key Room Star Piece,           item_entry,   tik,        80614444,     STAR_PIECE

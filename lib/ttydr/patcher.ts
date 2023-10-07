@@ -1,51 +1,24 @@
 import { Buffer } from 'buffer';
-
 import { Patchfile } from './patchfile';
-
-const DOL_OFFSET = 0x20300;
-
-type Section = {
-  vstart: number;
-  poffset: number;
-  size: number;
-};
+import { AddressMap } from './address-map';
 
 export class Patcher {
   private iso: Buffer;
+  private addrMap: AddressMap;
   private patches: Buffer;
   private patchfile: Patchfile;
   private cursor: number;
-  private sections: Section[];
 
-  constructor(iso: Buffer, patches: Buffer, patchfile: Patchfile) {
+  constructor(iso: Buffer, addrMap: AddressMap, patches: Buffer, patchfile: Patchfile) {
     this.iso = iso;
+    this.addrMap = addrMap;
     this.patches = patches;
     this.patchfile = patchfile;
     this.cursor = 0;
-    this.sections = [];
-
-    /* Read the DOL header */
-    for (let i = 0; i < 18; ++i) {
-      const offset = DOL_OFFSET + i * 4;
-      const poffset = iso.readUInt32BE(offset);
-      const vstart = iso.readUInt32BE(offset + 0x48);
-      const size = iso.readUInt32BE(offset + 0x90);
-      this.sections.push({ vstart, poffset, size });
-    }
   }
 
   private patch(romAddr: number, data: Buffer) {
     this.patchfile.addPatch(romAddr, data);
-  }
-
-  private virtualToPhysical(virtAddr: number): number {
-    for (const s of this.sections) {
-      if (s.vstart <= virtAddr && virtAddr < s.vstart + s.size) {
-        return DOL_OFFSET + s.poffset + (virtAddr - s.vstart);
-      }
-    }
-
-    throw new Error(`Invalid virtual address 0x${virtAddr.toString(16)}`);
   }
 
   patchASM(patch: Buffer) {
@@ -54,7 +27,7 @@ export class Patcher {
     this.cursor += 0x08;
     const data = patch.subarray(this.cursor, this.cursor + size);
     this.cursor += size;
-    const paddr = this.virtualToPhysical(addr);
+    const paddr = this.addrMap.virtualToPhysical(addr);
     this.patch(paddr, data);
   }
 
@@ -63,7 +36,7 @@ export class Patcher {
     const func = patch.readUInt32BE(this.cursor + 0x04);
     this.cursor += 0x08;
 
-    const paddr = this.virtualToPhysical(addr);
+    const paddr = this.addrMap.virtualToPhysical(addr);
     const rawInstr = this.iso.readUInt32BE(paddr);
     const offset = (func - addr) >>> 0;
     const op = (rawInstr >>> 26) & 0x3f;
