@@ -1,10 +1,23 @@
 location,                                             type,         rel,        addr,         item
-Rogueport Sewers Town Badge Soft Stomp,               item_entry,   tik,        8060EB54,     BADGE_SOFT_STOMP
-Rogueport Sewers Town Star Piece 1,                   item_entry,   tik,        8060EDFC,     STAR_PIECE
-Rogueport Sewers Town Star Piece 2,                   item_entry,   tik,        8060EE24,     STAR_PIECE
-Rogueport Sewers Town Star Piece 3,                   item_entry,   tik,        8060EE4C,     STAR_PIECE
-Rogueport Sewers East Entrance Badge Defend Plus P,   item_entry,   tik,        806102F4,     BADGE_DEFEND_PLUS_P
-Rogueport Sewers Woods Badge Damage Dodge,            item_entry,   tik,        8061367C,     BADGE_DAMAGE_DODGE
-Rogueport Sewers Black Key Room Badge Happy Heart P,  item_entry,   tik,        806140E4,     BADGE_HAPPY_HEART_P
-Rogueport Sewers Black Key,                           item_entry,   tik,        8061435C,     KEY_BLACK_1
-Rogueport Sewers Black Key Room Star Piece,           item_entry,   tik,        80614444,     STAR_PIECE
+Rogueport Sewers Town Badge Soft Stomp,               item,         tik,        8060EB54,     BADGE_SOFT_STOMP
+Rogueport Sewers Town Star Piece 1,                   item,         tik,        8060EDFC,     STAR_PIECE
+Rogueport Sewers Town Star Piece 2,                   item,         tik,        8060EE24,     STAR_PIECE
+Rogueport Sewers Town Star Piece 3,                   item,         tik,        8060EE4C,     STAR_PIECE
+Rogueport Sewers East Entrance Badge Defend Plus P,   item,         tik,        806102F4,     BADGE_DEFEND_PLUS_P
+Rogueport Sewers Woods Badge Damage Dodge,            item,         tik,        8061367C,     BADGE_DAMAGE_DODGE
+Rogueport Sewers Black Key Room Badge Happy Heart P,  item,         tik,        806140E4,     BADGE_HAPPY_HEART_P
+Rogueport Sewers Black Key,                           item,         tik,        8061435C,     KEY_BLACK_1
+Rogueport Sewers Black Key Room Star Piece,           item,         tik,        80614444,     STAR_PIECE
+Rogueport Sewers Pit Entrance Silver Card,            item,         tik,        8061AE2C,     CARD_SILVER
+Rogueport Sewers Pit Entrance Star Piece,             item,         tik,        8061B3D4,     STAR_PIECE
+Rogueport Sewers West Entrance Badge Flower Saver P,  item,         tik,        8061BC24,     BADGE_FLOWER_SAVER_P
+Rogueport Sewers West Entrance Star Piece 1,          item,         tik,        8061BD90,     STAR_PIECE
+Rogueport Sewers West Entrance Star Piece 2,          item,         tik,        8061BDC8,     STAR_PIECE
+Rogueport Sewers Star Piece House,                    item,         tik,        8061CBB0,     STAR_PIECE
+Rogueport Sewers Spikes Badge Spike Shield,           item,         tik,        80626EF8,     BADGE_SPIKE_SHIELD
+Rogueport Sewers West Pipes Badge FP Plus,            item,         tik,        806280E0,     BADGE_FP_PLUS
+Rogueport Sewers West Spania Room Badge,              item,         tik,        80629624,     BADGE_DEFEND_PLUS
+Rogueport Sewers East Hall Block 1,                   block,        tik,        806273C0,     MUSHROOM
+Rogueport Sewers East Hall Block 2,                   block,        tik,        806273E8,     FIRE_FLOWER
+Rogueport Sewers West Hall Block 1,                   block,        tik,        806286A0,     SLOW_SHROOM
+Rogueport Sewers West Hall Block 2,                   block,        tik,        806286C8,     GRADUAL_SYRUP

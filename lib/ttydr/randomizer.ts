@@ -8,7 +8,16 @@ export function randomize(addrMap: AddressMap, patch: Patchfile, world: World, i
   for (const [loc, item] of items.entries()) {
     const check = world.checks[loc];
     const ovl = check.rel;
-    const addr = check.addr + 8;
+    let off = 0;
+    switch (check.type) {
+    case 'item':
+      off = 8;
+      break;
+    case 'block':
+      off = 20;
+      break;
+    }
+    const addr = check.addr + off;
     const paddr = addrMap.virtualToPhysicalOvl(ovl, addr);
     const data = Buffer.alloc(4);
     const itemId = DATA_ITEMS[item.id] as number;
